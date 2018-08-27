@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>MyQuiz - {% block title %}{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="icon" type="image/png" href="site/images/logo.png"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
+
+        <link rel="stylesheet" href="site/css/bootstrap.css">
+        <link rel="stylesheet" href="site/css/animate.css">
+        <link rel="stylesheet" href="site/css/owl.carousel.min.css">
+        <link rel="stylesheet" href=site/fonts/ionicons/css/ionicons.min.css">
+        <link rel="stylesheet" href="site/fonts/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="site/fonts/flaticon/font/flaticon.css">
+
+        <!-- Theme Style -->
+        <link rel="stylesheet" href="site/css/style.css">
+    {% endblock %}
+    {% block morestylesheets %}
+    {% endblock %}
+</head>
+<body>
+
+<header role="banner">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-light">
+        <div class="container">
+            <a class="navbar-brand absolute" href="{{ path('home') }}">MyQuiz</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+                    aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('home') }}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="dropdown05" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Categories</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown05">
+                            <a class="dropdown-item" href="{{ path('category', {'slug': "all"}) }}">All</a>
+                        </div>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="">Leaders?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="">News?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav absolute-right">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a href="{{ path('account') }}" class="nav-link">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('logout') }}" class="nav-link">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="{{ path('login') }}" class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('join') }}" class="nav-link">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+{% block body %}{% endblock %}
+
+<footer class="site-footer" style="background-image: url(site/images/big_image_3.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This site is made by Herman Rabushka.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% block javascripts %}
+    <!-- loader -->
+    <div id="loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                    stroke="#f4b214"/>
+        </svg>
+    </div>
+
+    <script src="site/js/jquery-3.2.1.min.js"></script>
+    <script src="site/js/jquery-migrate-3.0.0.js"></script>
+    <script src="site/js/popper.min.js"></script>
+    <script src="site/js/bootstrap.min.js"></script>
+    <script src="site/js/owl.carousel.min.js"></script>
+    <script src="site/js/jquery.waypoints.min.js"></script>
+    <script src="site/js/jquery.stellar.min.js"></script>
+
+
+    <script src="site/js/main.js"></script>
+
+    <script src="quiz/js/questions.js"></script>
+    <script src="quiz/js/jquery.collection.js   "></script>
+
+    <script type="text/javascript">
+        $('.qweqwe').collection();
+        $('.qweqweqwe').collection();
+    </script>
+{% endblock %}
+</body>
+</html>

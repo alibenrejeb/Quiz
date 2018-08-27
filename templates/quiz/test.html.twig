@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block morestylesheets %}
+
+
+    <style type="text/css">
+        li * {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+    </style>
+{% endblock %}
+{% block title %}Creating quiz{% endblock %}
+
+{% block body %}
+    <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url(images/big_image_1.jpg);">
+        <div class="container">
+            <div class="row align-items-center site-hero-inner justify-content-center">
+                <div class="col-md-8 text-center">
+
+                    <div class="mb-5 element-animate">
+                        <h1>Creating a new one</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                {{ form_start(form) }}
+                <h3>Tags</h3>
+                <ul class="collectionHolder" data-prototype="{{ form_widget(form.questions.vars.prototype)|e }}">
+                    {# iterate over each existing tag and render its only field: name #}
+                    {% for questions in form.questions %}
+                        <li>{{ form_row(questions) }} </li>
+                        <ul class="collectionHolder" data-prototype="{{ form_widget(answers.vars.prototype)|e }}">
+                            {% for answers in questions.answers %}
+                                <li>{{ form_row(answers) }}</li>
+                            {% endfor %}
+                        </ul>
+
+                    {% endfor %}
+                </ul>
+                {{ form_end(form) }}
+
+
+                <script>
+                    var $collectionHolder;
+
+                    // setup an "add a tag" linkd
+                    var $addTagLink = $('<a href="#" class="add_tag_link">Add</a>');
+                    var $newLinkLi = $('<li></li>').append($addTagLink);
+
+                    jQuery(document).ready(function () {
+
+                        function addTagForm($collectionHolder, $newLinkLi) {
+                            // Get the data-prototype explained earlier
+                            var prototype = $collectionHolder.data('prototype');
+                            // get the new index
+                            var index = $collectionHolder.data('index');
+                            // Replace '__name__' in the prototype's HTML to
+                            // instead be a number based on how many items we have
+                            var newForm = prototype.replace(/__name__/g, index);
+
+                            // increase the index with one for the next item
+                            $collectionHolder.data('index', index + 1);
+
+                            // Display the form in the page in an li, before the "Add a tag" link li
+                            var $newFormLi = $('<li></li>').append(newForm);
+                            $newLinkLi.before($newFormLi);
+                        }
+
+
+                        $collectionHolder = $('.collectionHolder');
+
+                        $collectionHolder.append($newLinkLi);
+
+                        // count the current form inputs we have (e.g. 2), use that as the new
+                        // index when inserting a new item (e.g. 2)
+                        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+                        $addTagLink.on('click', function (e) {
+                            e.preventDefault();
+                            addTagForm($collectionHolder, $newLinkLi);
+                        });
+                    });
+                </script>
+
+
+            </div>
+        </div>
+    </section>
+    <script src="site/js/jquery-3.2.1.min.js"></script>
+    <script src="quiz/js/questions.js"></script>
+{% endblock %}

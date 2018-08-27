@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}All{% endblock %}
+
+{% block body %}
+    <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5"
+             style="background-image: url(site/images/big_image_1.jpg);">
+        <div class="container">
+            <div class="row align-items-center site-hero-inner justify-content-center">
+                <div class="col-md-8 text-center">
+
+                    <div class="mb-5 element-animate">
+                        <h1>All</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="bd-example" data-example-id="">
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        <hr>
+                        {% if quiz_list %}
+                        {% for quiz in quiz_list %}
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <div class="mb-0">
+                                    <a href="{{ path('quiz', {"id": quiz.id } ) }}"><h3>{{ quiz.name }}</h3>
+
+                                        <p>{{ quiz.description }}</p></a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
